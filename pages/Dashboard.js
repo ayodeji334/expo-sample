@@ -89,7 +89,7 @@ export default function Dashboard({ navigation }) {
                     }}>
                         <View>
                             <Text style={{ color: "#000", fontFamily: "PoppinsBold", fontSize: 19 }}>
-                                What is a Deficiency?
+                                Carbonhydrate and Protein are eesential nutrient.
                             </Text>
                             <Text style={{
                                 color: "#403f3f",
@@ -99,21 +99,25 @@ export default function Dashboard({ navigation }) {
                                 paddingTop: 10,
                                 paddingBottom: 10
                             }}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
-                                consequat semper viverra nam libero justo laoreet sit. Mauris 
-                                augue neque gravida in fermentum et sollicitudin ac. At in tellus 
-                                integer feugiat scelerisque varius. Adipiscing commodo elit at 
-                                imperdiet dui accumsan. Dui sapien eget mi proin sed libero enim 
-                                sed faucibus. Hac habitasse platea dictumst quisque sagittis purus 
-                                sit. Nullam ac tortor vitae purus faucibus. Blandit volutpat maecenas 
-                                volutpat blandit aliquam. Fusce ut placerat orci nulla pellentesque.
-                                Aliquam ut porttitor leo a diam sollicitudin tempor. Non odio euismod 
-                                lacinia at quis risus sed vulputate odio. Nisl suscipit adipiscing 
-                                bibendum est ultricies integer quis auctor. Lorem sed risus ultricies 
+                                The body requires an adequate amount of carbohydrates and protein 
+                                that are crucial for both body development and preventing disease. 
+                                If the body does not get the adequate amount of carbohydrates and 
+                                protein needed, it can result in health issues that can cause the 
+                                sudden death of the individual.
+
+                                There are many symptoms of carbohydrate and protein deficiency that 
+                                an individual will have been seen before the issues leading to 
+                                serious diseases such as diabetes, heart problem, and many more. 
+                                Failure to know the cause of those symptoms on time leads to the 
+                                sudden death of the individual. The current situation of things 
+                                in the country where only the medium class and higher class set of 
+                                people have access to a good medical checkup makes it difficult for 
+                                the lower class to know their health status at a point in time. Many 
+                                life will have been safe if there’s a free proper medical checkup for 
+                                every individual in the country.
                             </Text>
                             <Text style={{ color: "#000", fontFamily: "PoppinsBold", fontSize: 19 }}>
-                                What is a Symptoms?
+                                The aim of the system
                             </Text>
                             <Text style={{
                                 color: "#403f3f",
@@ -123,21 +127,14 @@ export default function Dashboard({ navigation }) {
                                 paddingTop: 10,
                                 paddingBottom: 15
                             }}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
-                                consequat semper viverra nam libero justo laoreet sit. Mauris 
-                                augue neque gravida in fermentum et sollicitudin ac. At in tellus 
-                                integer feugiat scelerisque varius. Adipiscing commodo elit at 
-                                sed faucibus. Hac habitasse platea dictumst quisque sagittis purus  
-                                {" "} 
-                                Check your symptoms and find out what could be causing them. 
-                                It's fast, free and anonymous.
-                                The main purpose of the application is to provides 
-                                you with a fast and accurate health assessment on the 
-                                symptoms you been seen for a while, if it's as a result of 
-                                inadequate of carbohydrates and protein nutrient in your body. And also 
-                                explain how you can regain your 100% healthy life. Click on 
-                                the "Start Checkup"  button below to start the check up
+                                The main aim of this project is to develop a system the can diagnosis 
+                                carbohydrates and protein deficiency based on the symptoms the individual 
+                                is seen, whether it is a symptom of carbohydrate or protein deficiency. 
+                                It will solve the problem discussed above, makes it easier for every individual 
+                                whether of the lower, medium, or higher class background to know their health 
+                                status without consulting the doctor. The system will provide the user with 
+                                adequate information based on each symptom the user inputs into the system. 
+                                It will help to reduce the cost spend on medical bills in the hospital.
                             </Text>
                         </View>
                         <TouchableOpacity
@@ -165,13 +162,6 @@ const styles = StyleSheet.create({
         paddingBottom: 130,
         paddingHorizontal: 25,
     },
-    drawer: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 16,
-        borderBottomColor: '#fff'
-    },
     navigationContainer: {
         backgroundColor: "#ecf0f1",
         borderBottomColor: '#fff'
@@ -194,7 +184,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         color: "#000000",
         fontFamily: "Poppins",
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "700"
     },
     buttonText: {

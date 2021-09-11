@@ -14,36 +14,39 @@ export default function Welcome({navigation}) {
     <React.Fragment>
         <StatusBar 
             barStyle="dark-content"
-            backgroundColor="#fff"
+            backgroundColor="#ffffff"
         />
         <View style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image source={require('../assets/doc.png')} style={styles.image}/>  
-                <Text style={styles.title}>Maintain a healthy life</Text> 
-                <Text style={styles.description}>
-                    Explore the symptoms of carbonhydrate and protein 
-                    deficiency.
-                </Text>
+                <Image source={require('../assets/white.png')} style={styles.image}/> 
+                <View>
+                    <Text style={styles.title}>Welcome to Giverr</Text>
+                    <Text style={styles.description}>
+                        Send money and share bills with your family, friends and loved ones
+                    </Text>
+                </View> 
             </View>
-            <View style={styles.navBtnContainer}>
-                <TouchableOpacity
-                    activeOpacity={0.4}
-                    onPress={() => navigation.navigate("Login")}
-                    style={[styles.button, styles.filledBtn ]}>
-                    <Text style={styles.filledBtnText}>
-                        Login
-                    </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    activeOpacity={0.4}
-                    onPress={() => navigation.navigate("Register")}
-                    style={[styles.button, styles.outlineBtn]}>
-                    <Text
-                        style={styles.outlineBtnText}>
-                        Register
-                    </Text>
-                </TouchableOpacity>
+            <View style={styles.groupBtn}>
+                <View style={{ paddingVertical: 20, width: "80%"}}>
+                    <TouchableOpacity
+                        activeOpacity={0.4}
+                        onPress={() => navigation.navigate("Register")}
+                        style={[styles.button, styles.filledBtn ]}>
+                        <Text style={styles.filledBtnText}>
+                            Get Started
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.4}
+                        onPress={() => navigation.navigate("Login")}
+                        style={[styles.button, styles.outlineBtn]}>
+                        <Text
+                            style={styles.outlineBtnText}>
+                            Login
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+               
             </View>
         </View>
     </React.Fragment>
@@ -54,44 +57,52 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingTop: 40,
-        paddingHorizontal: 40,
         fontFamily: "Poppins"
     },
     imageContainer: {
         flex: 2,
-        justifyContent: 'center',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 20
+        backgroundColor: "#000000",
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20,
+        borderRadius: 20,
+        paddingVertical: 20,
+        position: 'relative'
     },
-    navBtnContainer: {
+    groupBtn: {
         flex: 1,
-        justifyContent: 'center',
+        flexDirection: "column",
         alignItems: 'center',
-        paddingVertical: 20
+        justifyContent: 'center',
+        paddingHorizontal: 45
     },
     image: {
-        maxWidth: 400,
-        height: 240,
-        paddingVertical: 50,
-        marginVertical: 30,
-        resizeMode: "cover"
+        resizeMode: "cover",
+        width: 300,
+        height: 300,
+        marginVertical: 55,
     },
     title: {
-        fontSize: 23,
+        fontSize: 27,
         fontFamily: "PoppinsBold",
         letterSpacing: 1,
-        textAlign: "center"
+        textAlign: "center",
+        color: "#ffffff",
+        paddingVertical: 14
     },
     description: {
-        fontSize: 16,
+        fontSize: 15,
         fontFamily: "Poppins",
         letterSpacing: 1,
-        paddingVertical: 14,
+        paddingBottom: 40,
         textAlign: "center",
-        paddingBottom: 10,
+        maxWidth: "65%",
         fontWeight: "500",
-        color: "#808080"
+        color: "#fff",
     },
     filledBtnText: {
         textTransform: "uppercase",
@@ -102,23 +113,20 @@ const styles = StyleSheet.create({
     },
     outlineBtnText: {
         textTransform: "uppercase",
-        color: "#dc143c",
+        color: "#000000",
         textAlign: "center",
         fontSize: 14,
         fontFamily: "PoppinsBold",
     },
     button: {
-        paddingVertical: 19,
-        borderRadius: 9999,
-        width: "60%",
-        marginTop: 30
+        paddingVertical: 18,
+        borderRadius: 999,
+        marginTop: 30,
     },
     outlineBtn: {
-        backgroundColor: "#fff",
-        borderWidth: 2,
-        borderColor: "#dc143c"
+        backgroundColor: "#e7e7e7",
     },
     filledBtn: {
-        backgroundColor: "#dc143c"
+        backgroundColor: "#000000"
     }
 });

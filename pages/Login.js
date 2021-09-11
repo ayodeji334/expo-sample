@@ -57,19 +57,16 @@ export default function Login({navigation}) {
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerStyle: {
-                backgroundColor: "#dc143c",
+                backgroundColor: "#fff",
                 borderBottomWidth: 0,
                 elevation: 0,
                 shadowOpacity: 0,
             },
-            headerTitleStyle: {
-                display: "none"
-            },
             headerLeft: () => {
                 return (
-                    <View style={{padding: 22, marginTop: 10}}>
-                        <TouchableOpacity activeOpacity={0.4} onPress={() => navigation.goBack()}>
-                            <Ionicons name="arrow-back" size={28} color="white" />
+                    <View style={{padding: 20, marginTop: 10, marginBottom: 10, display: "flex", justifyContent: "center", alignContent: "center"}}>
+                        <TouchableOpacity style={{padding: 10, marginTop: 10, backgroundColor: "#000"}} activeOpacity={0.4} onPress={() => navigation.goBack()}>
+                            <Ionicons name="md-chevron-back-sharp" size={28} color="#e7e7e7" />
                         </TouchableOpacity>
                     </View>
                 )
@@ -89,84 +86,84 @@ export default function Login({navigation}) {
     return (
         <React.Fragment>
             <StatusBar
-                barStyle="light-content"
-                backgroundColor="#dc143c"
+                barStyle="dark-content"
+                backgroundColor="#fff"
             />
             <View style={styles.container}>
-                <View style={styles.imageContainer}>
-                    <Image source={require('../assets/white.png')} style={styles.image} />
-                    <Text style={{color: "#fff", fontFamily: "PoppinsBold", fontSize: 18, marginTop: -30}}>Healthy Life</Text>
+                <View style={styles.greetingInfo}>
+                    <Text style={styles.title}>Welcome Back</Text>
+                    <Text style={styles.description}>
+                        Fill in your credentails to get back in
+                    </Text>
                 </View>
                 <View style={styles.formContainer}>
-                    <View>
-                        <Text style={styles.label}>Email</Text>
-                        <TextInput    
-                            autoCompleteType="email"
-                            style={styles.input}
-                            underlineColorAndroid = "transparent"
-                            placeholder = "youremail@gmail.com"
-                            placeholderTextColor = "#8c8e8f"
-                            autoCapitalize = "none"
-                            returnKeyType = "next"
-                            keyboardType='email-address'
-                            textContentType="emailAddress"
-                            onChangeText={(text)=>{
-                                setEmail(text)
-                            }}
-                            blurOnSubmit={true}
-                            value={email}
-                        />
+                    <Text style={styles.label}>Email</Text>
+                    <TextInput    
+                        autoCompleteType="email"
+                        style={styles.input}
+                        underlineColorAndroid = "transparent"
+                        placeholder = "youremail@gmail.com"
+                        placeholderTextColor = "#8c8e8f"
+                        autoCapitalize = "none"
+                        returnKeyType = "next"
+                        keyboardType='email-address'
+                        textContentType="emailAddress"
+                        onChangeText={(text)=>{
+                            setEmail(text)
+                        }}
+                        blurOnSubmit={true}
+                        value={email}
+                    />
 
-                        <Text style={styles.label}>Password</Text>
-                        <TextInput 
-                            autoCompleteType="password"
-                            style={styles.input}
-                            value={password}
-                            onChangeText={(text)=>{
-                                setPassword(text);
-                            }}
-                            blurOnSubmit={true}
-                            textContentType="password"
-                            keyboardType="default"
-                            placeholder = "***********"
-                            placeholderTextColor = "#8c8e8f"
-                            autoCapitalize = "none"
-                            returnKeyType = "go" 
-                            style={styles.input}
-                            secureTextEntry={true}
-                        />
+                    <Text style={styles.label}>Password</Text>
+                    <TextInput 
+                        autoCompleteType="password"
+                        style={styles.input}
+                        value={password}
+                        onChangeText={(text)=>{
+                            setPassword(text);
+                        }}
+                        blurOnSubmit={true}
+                        textContentType="password"
+                        keyboardType="default"
+                        placeholder = "***********"
+                        placeholderTextColor = "#8c8e8f"
+                        autoCapitalize = "none"
+                        returnKeyType = "go" 
+                        style={styles.input}
+                        secureTextEntry={true}
+                    />
 
+                    <Text 
+                        style={{
+                            paddingVertical: 5,
+                            textAlign: "right",
+                            color: "#dc143c",
+                            fontWeight: "500",
+                            fontFamily: "Poppins",
+                            fontSize: 13 
+                        }} 
+                        onPress={() => { navigation.navigate('ForgetPassword') }}
+                    >
+                        Forget Password
+                    </Text>
+
+                    <TouchableOpacity
+                        disabled={loading}
+                        activeOpacity={0.8}
+                        onPress={handleLogin}
+                        style={loading ? styles.disabled : styles.button}>
+                        {!loading ? <Text style={styles.buttonText}>Log in</Text> : <Text style={styles.buttonText}>Loading...</Text> }
+                    </TouchableOpacity>
+
+                    <Text style={{marginTop: 35, textAlign:"center", fontFamily: "Poppins" }}>
+                        Don't have an account? {" "}
                         <Text 
-                            style={{
-                                paddingVertical: 5,
-                                textAlign: "right",
-                                color: "#dc143c",
-                                fontWeight: "500",
-                                fontFamily: "Poppins",
-                                fontSize: 13 
-                            }} 
-                            onPress={() => { navigation.navigate('ForgetPassword') }}
-                        >
-                            Forget Password
+                            style={styles.link} 
+                            onPress={()=>{navigation.navigate('Register')}}> 
+                            Sign Up
                         </Text>
-
-                        <TouchableOpacity
-                            disabled={loading}
-                            activeOpacity={0.8}
-                            onPress={handleLogin}
-                            style={loading ? styles.disabled : styles.button}>
-                            {!loading ? <Text style={styles.buttonText}>Log in</Text> : <Text style={styles.buttonText}>Loading...</Text> }
-                        </TouchableOpacity>
-
-                        <Text style={{marginTop: 35, textAlign:"center", fontFamily: "Poppins", fontSize: 14 }}>
-                            New user? {" "}
-                            <Text 
-                                style={styles.link} 
-                                onPress={()=>{navigation.navigate('Register')}}> 
-                                Create an account
-                            </Text>
-                        </Text>
-                    </View>
+                    </Text>
                 </View>
             </View>
         </React.Fragment>
@@ -176,7 +173,7 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#dc143c',
+        backgroundColor: '#ffffff',
         fontFamily: "Poppins",
     },
     error: {
@@ -188,39 +185,52 @@ const styles = StyleSheet.create({
         fontSize: 13
     },
     image: {
-        width: 100,
+        width: 200,
         height: 120,
     },
     input: {
-        borderRadius: 10,
+        borderRadius: 14,
         borderColor: "#cbcaca",
         borderWidth: 2,
-        paddingVertical: 13,
+        paddingVertical: 14,
         paddingHorizontal: 18,
         marginTop: 1,
         marginBottom: 10,
         fontFamily: "Poppins",
         fontSize: 13
     },
+    title: {
+        fontSize: 27,
+        fontFamily: "PoppinsBold",
+        letterSpacing: 1,
+        textAlign: "center",
+        color: "#000",
+        paddingVertical: 14
+    },
+    description: {
+        fontSize: 15,
+        fontFamily: "Poppins",
+        letterSpacing: 1,
+        paddingBottom: 40,
+        textAlign: "center",
+        maxWidth: "65%",
+        fontWeight: "500",
+        color: "#000",
+    },
     label: {
         fontSize: 13,
         fontFamily: "PoppinsBold"
     },
-    imageContainer: {
-        flex: 1,
+    greetingInfo: {
         color: "#000000",
-        paddingBottom: 30,
+        marginTop: 30,
+        paddingTop: 30,
+        paddingBottom: 10,
         justifyContent: "center",
         alignItems: "center"
     },
     formContainer: {
-        flex: 2,
-        backgroundColor: "#fff",
-        color: '#fff',
-        paddingVertical: 40,
-        paddingHorizontal: 20,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        paddingHorizontal: 30
     },
     buttonText: {
         textTransform: "uppercase",
@@ -230,11 +240,11 @@ const styles = StyleSheet.create({
         fontSize: 13,
     },
     button: {
-        backgroundColor: "#dc143c",
+        backgroundColor: "#000000",
         paddingVertical: 18,
         borderRadius: 50,
         width: "100%",
-        marginTop: 15,
+        marginTop: 25,
     },
     text: {
         color: "white",

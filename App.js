@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -14,7 +13,7 @@ import SearchSymptom from './pages/SearchSymptom';
 import Dashboard from './pages/Dashboard';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
-
+import { useEffect } from 'react';
 
 //Prevent splashscreen from auto hiding until the app finish loading auth state
 SplashScreen.preventAutoHideAsync();
@@ -104,7 +103,7 @@ export default function App() {
     PoppinsBold: require('./assets/fonts/Poppins-Black.ttf')
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(async () => {
       // Hide the splash after 4s
       await SplashScreen.hideAsync()
@@ -125,13 +124,3 @@ export default function App() {
     </SafeAreaProvider>
   )
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    justifyContent: 'center',
-    fontFamily: "Poppins",
-    height: "100%"
-  },
-});
