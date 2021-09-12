@@ -2,65 +2,16 @@ import * as React from 'react';
 import { 
     StyleSheet, 
     Text, 
-    View, 
-    Image, 
-    TextInput, 
+    View,  
     TouchableOpacity, 
     ScrollView,
     StatusBar
 } from 'react-native';
 import { useFonts } from "expo-font";
-import { Context } from '../config/Context';
-import { AUTHENTICATION_SUCCESS } from '../config/Reducer';
-// import users from "../config/Users";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
+import RegisterForm from '../components/RegisterForm';
 
 export default function Register({ navigation }) {
-    const [firstname, setFirstname] = React.useState("");
-    const [surname, setSurname] = React.useState('');
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const { dispatch } = React.useContext(Context);
-    const [loading, setLoading] = React.useState(false);
-
-    const handleRegister = async () => {
-        setLoading(true);
-
-        const users = await AsyncStorage.getItem("@users");
-        const all_users = JSON.parse(users);
-
-        const matched_users = all_users.filter(user => user.email === email);
-        const new_user = {
-            id: all_users.length + 1,
-            firstname,
-            email,
-            password,
-        };
-
-        if(matched_users.length > 0){
-            alert("Email already used by another person");
-            setLoading(false);
-
-        }else {
-
-            //Push to all users array
-            all_users.push(new_user);
-
-            //Update users data to local storage.
-            await AsyncStorage.setItem("@users", JSON.stringify(all_users));
-
-            //Add user crendential data to local storage.
-            await AsyncStorage.setItem("@user_data", JSON.stringify(new_user));
-
-            setLoading(false);
-
-            //Change the auth state 
-            dispatch({ type: AUTHENTICATION_SUCCESS, payload: new_user});
-        }
-
-    };
-
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerStyle: {
@@ -74,9 +25,14 @@ export default function Register({ navigation }) {
             },
             headerLeft: () => {
                 return (
-                    <View style={{padding: 20, marginTop: 10, display: "flex", justifyContent: "center", alignContent: "center"}}>
-                        <TouchableOpacity activeOpacity={0.4} onPress={() => navigation.goBack()}>
-                            <Ionicons name="md-chevron-back-sharp" size={28} color="black" />
+                    <View style={{padding: 20, marginTop: 8, marginBottom: 10}}>
+                        <TouchableOpacity style={{
+                            padding: 8, 
+                            marginTop: 8, 
+                            backgroundColor: "#e7e7e7",
+                            borderRadius: 9999
+                        }} activeOpacity={0.4} onPress={() => navigation.goBack()}>
+                            <Ionicons name="md-chevron-back-sharp" size={21} color="#000" />
                         </TouchableOpacity>
                     </View>
                 )
@@ -93,8 +49,6 @@ export default function Register({ navigation }) {
         return null;
     }
 
- 
-
     return (
         <React.Fragment>
             <StatusBar
@@ -110,88 +64,7 @@ export default function Register({ navigation }) {
                         </Text>
                     </View>
                     <View style={styles.formContainer}>
-                        <Text style={styles.label}>Firstname</Text>
-                        <TextInput 
-                            style={styles.input}
-                            underlineColorAndroid = "transparent"
-                            placeholder = "e.g Odunayo"
-                            placeholderTextColor = "#8c8e8f"
-                            autoCompleteType="name" 
-                            autoCapitalize = "none"
-                            returnKeyType = "next"
-                            keyboardType='email-address'
-                            textContentType="name"
-                            onChangeText={(text)=>{
-                                setFirstname(text)
-                            }}
-                            blurOnSubmit={true}
-                            value={firstname}
-                        />
-                        <Text style={styles.label}>Surname</Text>
-                        <TextInput
-                            autoCompleteType="name" 
-                            style={styles.input}
-                            underlineColorAndroid = "transparent"
-                            placeholder = "e.g Fawumi"
-                            placeholderTextColor = "#8c8e8f"
-                            autoCapitalize = "none"
-                            returnKeyType = "next"
-                            keyboardType='email-address'
-                            textContentType="name"
-                            onChangeText={(text)=>{
-                                setSurname(text)
-                            }}
-                            blurOnSubmit={true}
-                            value={surname}
-                        />
-                        <Text style={styles.label}>Email</Text>
-                        <TextInput
-                            autoCompleteType="email"
-                            style={styles.input}
-                            underlineColorAndroid = "transparent"
-                            placeholder = "youremail@gmail.com"
-                            placeholderTextColor = "#8c8e8f"
-                            autoCapitalize = "none"
-                            returnKeyType = "next"
-                            keyboardType='email-address'
-                            textContentType="emailAddress"
-                            onChangeText={(text)=>{
-                                setEmail(text)
-                            }}
-                            blurOnSubmit={true}
-                            value={email}
-                        />
-                        <Text style={styles.label}>Password</Text>
-                        <TextInput 
-                            style={styles.input}
-                            value={password}
-                            onChangeText={(text)=>{
-                                setPassword(text);
-                            }}
-                            autoCompleteType="password"
-                            blurOnSubmit={true}
-                            textContentType="password"
-                            keyboardType="default"
-                            placeholder = "*************"
-                            placeholderTextColor = "#8c8e8f"
-                            autoCapitalize = "none"
-                            returnKeyType = "go" 
-                            style={styles.input}
-                            secureTextEntry={true}
-                        />
-                        <TouchableOpacity 
-                            disabled={loading}
-                            activeOpacity={0.8}
-                            onPress={handleRegister}
-                            style={loading ? styles.disabled : styles.button}>
-                                {  
-                                    loading ? (
-                                        <Text style={styles.buttonText}>Loading...</Text>
-                                    ) : (
-                                        <Text style={styles.buttonText}>Sign Up</Text>
-                                    )
-                                }
-                        </TouchableOpacity>
+                        <RegisterForm />
                         <Text style={{
                             marginTop: 35,
                             textAlign:"center", 
@@ -219,7 +92,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         fontFamily: "Poppins",
         paddingTop: 10,
-        paddingBottom: 90
+        paddingBottom: 130
     },
     label: {
         fontSize: 13,
@@ -243,28 +116,13 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         color: "#000",
     },
-    image: {
-        width: 200,
-        height: 120,
-    },
-    input: {
-        borderRadius: 14,
-        borderColor: "#cbcaca",
-        borderWidth: 2,
-        paddingVertical: 14,
-        paddingHorizontal: 18,
-        marginTop: 1,
-        marginBottom: 10,
-        fontFamily: "Poppins",
-        fontSize: 13
-    },
     formContainer: {
         paddingHorizontal: 30
     },
     greetingInfo: {
         color: "#000000",
-        marginTop: 30,
-        paddingTop: 30,
+        marginTop: 20,
+        paddingTop: 10,
         paddingBottom: 10,
         justifyContent: "center",
         alignItems: "center"
