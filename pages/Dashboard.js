@@ -1,23 +1,69 @@
-import * as React from 'react';
+import React, {useState, useLayoutEffect, useContext, useEffect } from 'react';
 import { Ionicons, Feather, Entypo } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, StatusBar  } from 'react-native';
 import { Context } from '../config/Context';
 import { ScrollView } from 'react-native';
 import { LOG_OUT_SUCCESS } from '../config/Reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TransactionList from '../components/TransactionList';
 
 export default function Dashboard({ navigation }) {
-    let { state, dispatch } = React.useContext(Context);
-    const [greetMessage, setGreetingMessage] = React.useState("");
-    const [time] = React.useState(new Date().getHours());
+    let { state, dispatch } = useContext(Context);
+    const [greetMessage, setGreetingMessage] = useState("How has been your day?");
+    const [time] = useState(new Date().getHours());
+    const [isShowBalance, setIsShowBalance] = useState(false)
     const user = state.currentUser;
+    const transactions = [
+        {
+            id: 1,
+            sender: "John Smith",
+            receiver: "Samuel Bill",
+            created_at: "2021-09-12 09:34pm",
+            amount: "#120,000"
+        },
+        {
+            id: 2,
+            sender: "Ayodeji Ayomide",
+            receiver: "Samuel Bill",
+            created_at: "2021-09-12 09:34pm",
+            amount: "#120,000"
+        },
+        {
+            id: 3,
+            sender: "John Smith",
+            receiver: "Samuel Bill",
+            created_at: "2021-09-12 09:34pm",
+            amount: "#120,000"
+        },
+        {
+            id: 4,
+            sender: "Ayodeji Ayomide",
+            receiver: "Samuel Bill",
+            created_at: "2021-09-12 09:34pm",
+            amount: "#120,000"
+        },
+        {
+            id: 5,
+            sender: "John Smith",
+            receiver: "Samuel Bill",
+            created_at: "2021-09-12 09:34pm",
+            amount: "#120,000"
+        },
+        {
+            id: 6,
+            sender: "Ayodeji Ayomide",
+            receiver: "Samuel Bill",
+            created_at: "2021-09-12 09:34pm",
+            amount: "#120,000"
+        }
+    ];
 
     const handleLogOut = async () => {
         await AsyncStorage.removeItem("@user_data");
         dispatch({ type: LOG_OUT_SUCCESS, payload: null});
     };
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
         navigation.setOptions({
             headerStyle: {
                 backgroundColor: "#fff",
@@ -40,7 +86,7 @@ export default function Dashboard({ navigation }) {
         })
     });
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (time < 12) {
             setGreetingMessage("Good morning ☁️. Have a nice day");
         }
@@ -53,7 +99,7 @@ export default function Dashboard({ navigation }) {
             setGreetingMessage("Good Evening 🌤️. How was your day?");
         } 
 
-        if(time > 22){
+        if(time >= 22){
             setGreetingMessage("Good Night. Have a wonderful Dream 🌙");
         }
 
@@ -64,88 +110,113 @@ export default function Dashboard({ navigation }) {
             <StatusBar backgroundColor="#fff" barStyle="dark-content" />
             <ScrollView>
                 <View style={styles.container}>
+                    <View style={{paddingVertical: 20}}>
+                        <View style={{  
+                            marginBottom: 35, 
+                        }}>
+                            <Text style={{ 
+                                color: "#000",
+                                fontFamily: "PoppinsBold", 
+                                fontSize: 22,
+                                textTransform: "capitalize"
+                            }}>Hello, {user.firstname}</Text>
+                            <Text style={styles.greetingText}>{greetMessage}</Text>
+                        </View>
+                    </View> 
                     <View style={{ 
-                        flex: 1,
-                        paddingHorizontal: 14,
-                        paddingVertical: 20,
-                        backgroundColor: "#dc143c", 
-                        borderColor: "#000",
-                        marginTop: 20, 
-                        marginBottom: 35, 
-                        borderRadius: 10
-                    }}>
-                        <Text style={{ 
-                            color: "#fff",
-                            fontFamily: "Poppins", 
-                            fontSize: 20
-                        }}>Hello,</Text>
-                        <Text style={styles.username}>
-                            {user.firstname}
-                        </Text>
-                        <Text style={styles.greetingText}>{greetMessage}</Text>
-                    </View>
-                    <View style={{
-                        flex: 2,
+                        paddingHorizontal: 30,
+                        paddingVertical: 30,
+                        backgroundColor: "#000", 
+                        borderColor: "#000", 
+                        marginBottom: 25, 
+                        marginTop: -20,
+                        borderRadius: 20,
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItem: "center"
                     }}>
                         <View>
-                            <Text style={{ color: "#000", fontFamily: "PoppinsBold", fontSize: 19 }}>
-                                Carbonhydrate and Protein are eesential nutrient.
-                            </Text>
-                            <Text style={{
-                                color: "#403f3f",
-                                fontFamily: "Poppins",
-                                lineHeight: 21,
-                                fontSize: 15,
-                                paddingTop: 10,
-                                paddingBottom: 10
+                            <Text style={{ 
+                                color: "#fff",
+                                fontFamily: "Poppins", 
+                                fontSize: 19
                             }}>
-                                The body requires an adequate amount of carbohydrates and protein 
-                                that are crucial for both body development and preventing disease. 
-                                If the body does not get the adequate amount of carbohydrates and 
-                                protein needed, it can result in health issues that can cause the 
-                                sudden death of the individual.
-
-                                There are many symptoms of carbohydrate and protein deficiency that 
-                                an individual will have been seen before the issues leading to 
-                                serious diseases such as diabetes, heart problem, and many more. 
-                                Failure to know the cause of those symptoms on time leads to the 
-                                sudden death of the individual. The current situation of things 
-                                in the country where only the medium class and higher class set of 
-                                people have access to a good medical checkup makes it difficult for 
-                                the lower class to know their health status at a point in time. Many 
-                                life will have been safe if there’s a free proper medical checkup for 
-                                every individual in the country.
+                                Your Balance
                             </Text>
-                            <Text style={{ color: "#000", fontFamily: "PoppinsBold", fontSize: 19 }}>
-                                The aim of the system
-                            </Text>
-                            <Text style={{
-                                color: "#403f3f",
-                                fontFamily: "Poppins",
-                                lineHeight: 21,
-                                fontSize: 15,
-                                paddingTop: 10,
-                                paddingBottom: 15
-                            }}>
-                                The main aim of this project is to develop a system the can diagnosis 
-                                carbohydrates and protein deficiency based on the symptoms the individual 
-                                is seen, whether it is a symptom of carbohydrate or protein deficiency. 
-                                It will solve the problem discussed above, makes it easier for every individual 
-                                whether of the lower, medium, or higher class background to know their health 
-                                status without consulting the doctor. The system will provide the user with 
-                                adequate information based on each symptom the user inputs into the system. 
-                                It will help to reduce the cost spend on medical bills in the hospital.
-                            </Text>
+                            {isShowBalance ? (
+                                <Text style={styles.amount}>
+                                    <Text style={{fontSize: 23}}>₦ </Text>
+                                    456, 000
+                                </Text>
+                            ) : (
+                                <Text style={styles.amount}>
+                                   XXX,xxx
+                                </Text>
+                            )}
                         </View>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={styles.button}
-                            onPress={() => navigation.navigate("SearchPage")}>
-                            <Text style={styles.buttonText}>
-                                Start Checkup
-                            </Text>
-                            <Feather name="arrow-right" style={{paddingHorizontal:10}} size={20} color="#fff" />
+                        <View style={{ flex: 1, justifyContent: "center", alignItems: "flex-end"}}>
+                            <TouchableOpacity style={{
+                                paddingVertical: 8, 
+                                paddingHorizontal: 12,
+                                marginTop: 8, 
+                                backgroundColor: "#e7e7e7",
+                                borderRadius: 9
+                            }} activeOpacity={0.8} onPress={() => setIsShowBalance(!isShowBalance)}>
+                                <Text style={{fontSize: 15, fontFamily: "Poppins"}}>
+                                    {isShowBalance ? "Hide Balance" : "Show Balance"}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                        <TouchableOpacity style={{
+                            paddingVertical: 20, 
+                            paddingHorizontal: 20,
+                            marginTop: 8, 
+                            backgroundColor: "#000",
+                            width: "40%",
+                            borderRadius: 99
+                        }} activeOpacity={0.7} onPress={() => navigation.navigate("Send-Money")}>
+                            <Text style={styles.buttonText}>Send Money</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity style={{
+                            paddingVertical: 20, 
+                            paddingHorizontal: 20,
+                            marginTop: 8,
+                            backgroundColor: "green",
+                            width: "40%",
+                            borderRadius: 99
+                        }} activeOpacity={0.7} onPress={() => navigation.navigate("Request-Money")}>
+                            <Text style={styles.outlineText}>Request Money</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ paddingVertical: 30, marginTop: 40 }}>
+                        <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                            <Text style={styles.title}>
+                                Recent Transactions
+                            </Text>
+                            <Text style={styles.link} onPress={() => navigation.navigate("My-Transactions")}>
+                                See All
+                            </Text></View>
+                        <View style={styles.result}>
+                            {
+                                transactions.length === 0 ? (
+                                    <Text style={{
+                                        flex: 1, justifyContent: 'center',
+                                        alignItems: 'center',
+                                        fontFamily: 'Poppins', fontSize: 14
+                                    }}>
+                                        No transaction 
+                                    </Text>
+                                ) : (
+                                    <TransactionList 
+                                        transactions={transactions} 
+                                        onSelectTransaction={(transaction) => console.log(transaction)} 
+                                    />
+                                )
+                            }
+                        </View>
                     </View>
                 </View> 
             </ScrollView>
@@ -166,18 +237,25 @@ const styles = StyleSheet.create({
         backgroundColor: "#ecf0f1",
         borderBottomColor: '#fff'
     },
-    username: { 
+    title: {
+        textTransform: "uppercase",
+        color: "#000",
+        textAlign: "left",
+        fontFamily: "PoppinsBold",
+        fontSize: 17
+    },
+    amount: { 
         color: "#fff", 
-        fontFamily: "PoppinsBold", 
-        fontSize: 24, 
-        textTransform: "capitalize" 
+        fontFamily: "PoppinsBold",
+        fontSize: 30, 
+        textTransform: "uppercase" 
     },
     greetingText: {
         fontSize: 15,
         fontFamily: "Poppins",
         letterSpacing: 1,
         fontWeight: "800",
-        color: "#fff"
+        color: "#000"
     },
     text: {
         paddingLeft: 0,
@@ -194,6 +272,13 @@ const styles = StyleSheet.create({
         fontFamily: "PoppinsBold",
         fontSize: 13,
     },
+    outlineText: {
+        textTransform: "uppercase",
+        color: "#fff",
+        textAlign: "center",
+        fontFamily: "PoppinsBold",
+        fontSize: 13,
+    },
     button: {
         backgroundColor: "#dc143c",
         paddingVertical: 18,
@@ -204,5 +289,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    link: {
+        padding: 10,
+        marginLeft: 14,
+        color: "#dc143c",
+        fontSize: 17,
+        fontFamily: "Poppins",
+        fontWeight: "bold"
+    },
 });

@@ -14,6 +14,9 @@ import Dashboard from './pages/Dashboard';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import RequestMoney from './pages/RequestMoney';
+import SendMoney from './pages/SendMoney';
+import Transactions from './pages/Transactions';
 
 //Prevent splashscreen from auto hiding until the app finish loading auth state
 SplashScreen.preventAutoHideAsync();
@@ -29,6 +32,36 @@ const MyStack = () => {
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
+          options={{
+            headerTitleStyle: {
+              display: "none"
+            },
+            headerShown: true
+          }}
+        />
+        <Stack.Screen
+          name="Send-Money"
+          component={SendMoney}
+          options={{
+            headerTitleStyle: {
+              display: "none"
+            },
+            headerShown: true
+          }}
+        />
+        <Stack.Screen
+          name="My-Transactions"
+          component={Transactions}
+          options={{
+            headerTitleStyle: {
+              display: "none"
+            },
+            headerShown: true
+          }}
+        />
+        <Stack.Screen
+          name="Request-Money"
+          component={RequestMoney}
           options={{
             headerTitleStyle: {
               display: "none"
@@ -100,7 +133,7 @@ const MyStack = () => {
 export default function App() {
   const [loaded] = useFonts({
     Poppins: require('./assets/fonts/Poppins-Medium.ttf'),
-    PoppinsBold: require('./assets/fonts/Poppins-Black.ttf')
+    PoppinsBold: require('./assets/fonts/Poppins-Regular.ttf')
   });
 
   useEffect(() => {
