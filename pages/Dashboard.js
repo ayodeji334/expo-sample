@@ -187,7 +187,7 @@ export default function Dashboard({ navigation }) {
                             backgroundColor: "green",
                             width: "40%",
                             borderRadius: 99
-                        }} activeOpacity={0.7} onPress={() => navigation.navigate("Request-Money")}>
+                        }} activeOpacity={0.7} onPress={() => navigation.navigate("Fund-Wallet")}>
                             <Text style={styles.outlineText}>Request Money</Text>
                         </TouchableOpacity>
                     </View>
@@ -218,7 +218,7 @@ export default function Dashboard({ navigation }) {
                             }
                         </View>
                     </View>
-                </View> 
+                </View>
             </ScrollView>
         </React.Fragment>
     )

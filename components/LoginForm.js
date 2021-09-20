@@ -26,7 +26,6 @@ export default function LoginForm({ navigation }) {
             setMessage("Email and Password is required");
             setAlertType("error");
             setModalVisibility(true);
-
             return;
         }
 
@@ -34,11 +33,9 @@ export default function LoginForm({ navigation }) {
             if(matched_users[0].password === values.password){
                 await AsyncStorage.setItem("@user_data", JSON.stringify(matched_users[0]));
             
-                setTimeout(() => {
-                    actions.setSubmitting(false);
-                    setModalVisibility(false);
-                    dispatch({ type: AUTHENTICATION_SUCCESS, payload: matched_users[0]});
-                }, 4000);
+                actions.setSubmitting(false);
+                setModalVisibility(false);
+                dispatch({ type: AUTHENTICATION_SUCCESS, payload: matched_users[0]});
                 
             }else{
                 setMessage("Invalid email or Password");
