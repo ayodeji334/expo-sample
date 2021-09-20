@@ -16,6 +16,15 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "",
+          "enableGooglePay": true
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },
