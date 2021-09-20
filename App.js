@@ -9,7 +9,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ContextProvider from './config/Context';
 import { Context } from './config/Context';
-import SearchSymptom from './pages/SearchSymptom';
 import Dashboard from './pages/Dashboard';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
@@ -17,6 +16,8 @@ import { useEffect } from 'react';
 import RequestMoney from './pages/RequestMoney';
 import SendMoney from './pages/SendMoney';
 import Transactions from './pages/Transactions';
+import { StripeProvider }  from '@stripe/stripe-react-native'
+import FundWallet from './pages/FundWallet';
 
 //Prevent splashscreen from auto hiding until the app finish loading auth state
 SplashScreen.preventAutoHideAsync();
@@ -32,6 +33,16 @@ const MyStack = () => {
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
+          options={{
+            headerTitleStyle: {
+              display: "none"
+            },
+            headerShown: true
+          }}
+        />
+         <Stack.Screen
+          name="Fund-Wallet"
+          component={FundWallet}
           options={{
             headerTitleStyle: {
               display: "none"
@@ -62,16 +73,6 @@ const MyStack = () => {
         <Stack.Screen
           name="Request-Money"
           component={RequestMoney}
-          options={{
-            headerTitleStyle: {
-              display: "none"
-            },
-            headerShown: true
-          }}
-        />
-        <Stack.Screen
-          name="SearchPage"
-          component={SearchSymptom}
           options={{
             headerTitleStyle: {
               display: "none"
@@ -133,7 +134,7 @@ const MyStack = () => {
 export default function App() {
   const [loaded] = useFonts({
     Poppins: require('./assets/fonts/Poppins-Medium.ttf'),
-    PoppinsBold: require('./assets/fonts/Poppins-Regular.ttf')
+    PoppinsBold: require('./assets/fonts/Poppins-Bold.ttf')
   });
 
   useEffect(() => {
@@ -151,7 +152,9 @@ export default function App() {
     <SafeAreaProvider>
       <ContextProvider>
         <NavigationContainer>
-          <MyStack />
+          <StripeProvider publishableKey="pk_test_51HvizYAgHl7A4hTzKMCAyq8bgrJL2OWbfFwC9KCWcJCzL5cCsWntW3vNNPQdK72O3hegC0SVBn3NRgh89LMPjhlZ00ocY7cNf5">
+            <MyStack />
+          </StripeProvider>
         </NavigationContainer>
       </ContextProvider>
     </SafeAreaProvider>
